@@ -1,682 +1,230 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="theme-color" content="#080808">
-    <meta name="description" content="ZEVRX — профессиональный автомобильный детейлинг. Уход, восстановление и защита автомобиля.">
-
-    <title>ZEVRX — Premium Detailing</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <title>ZEVRX — Детейлинг</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <!-- =================================
-         INTRO
-    ================================== -->
-
+    <!-- INTRO -->
     <section class="intro" id="intro">
-
         <div class="intro-bg"></div>
         <div class="intro-grid"></div>
         <div class="intro-noise"></div>
 
         <div class="intro-top">
-            <span>ZEVRX AUTOMOTIVE</span>
-            <span>PREMIUM DETAILING</span>
+            <span class="intro-brand">ZEVRX<span>.</span></span>
+            <span class="intro-label">AUTOMOTIVE DETAILING</span>
         </div>
 
-        <div class="intro-heading">
-            <div class="intro-line"></div>
-
-            <p class="intro-overline">THE ART OF PERFECTION</p>
-
-            <h1 class="intro-logo">
-                ZEV<span>R</span>X
-            </h1>
-
-            <p class="intro-caption">
-                MORE THAN JUST DETAILING
-            </p>
-
-            <div class="intro-line intro-line-bottom"></div>
+        <div class="intro-center">
+            <p class="intro-kicker">PRECISION. CARE. PERFECTION.</p>
+            <h1>BEYOND<br><span>THE SHINE.</span></h1>
         </div>
 
         <div class="intro-car-area">
-
-            <div class="intro-red-glow"></div>
+            <div class="intro-red-light"></div>
             <div class="intro-road"></div>
 
-            <div class="intro-light intro-light-left"></div>
-            <div class="intro-light intro-light-right"></div>
-
+            <!-- ДВИГАЕТСЯ ТОЛЬКО ЭТА МАШИНА -->
             <div class="intro-car" id="introCar">
-                <img
-                    src="assets/images/intro-car.jpg"
-                    alt="Sports car in cinematic red lighting"
-                >
+                <img src="assets/images/intro-car.png" alt="ZEVRX car">
             </div>
-
         </div>
 
         <div class="intro-bottom">
-
-            <div class="intro-side-info">
-                <span>01 / 01</span>
-                <span>BUILT AROUND DETAILS</span>
-            </div>
-
-            <button class="intro-button" id="enterSite" type="button">
+            <button class="enter-button" id="enterSite">
                 <span>ENTER EXPERIENCE</span>
-                <span class="intro-button-arrow">↗</span>
+                <span class="enter-arrow">↗</span>
             </button>
-
-            <div class="intro-side-info intro-side-right">
-                <span>EST. DETAILING</span>
-                <span>DESIGNED TO IMPRESS</span>
-            </div>
-
+            <span class="intro-bottom-note">A NEW LEVEL OF CAR CARE</span>
         </div>
 
         <audio id="engineSound" preload="auto">
             <source src="assets/audio/engine.mp3" type="audio/mpeg">
         </audio>
-
     </section>
 
-
-    <!-- =================================
-         MAIN WEBSITE
-    ================================== -->
-
+    <!-- MAIN SITE -->
     <main class="site" id="site">
 
-        <!-- HEADER -->
-
         <header class="header" id="header">
+            <a href="#" class="logo">ZEVRX<span>.</span></a>
 
-            <a href="#home" class="logo" aria-label="ZEVRX home">
-                ZEV<span>R</span>X
-            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">
+                <span></span><span></span>
+            </button>
 
-            <nav class="navigation" id="navigation">
-
+            <nav class="nav" id="nav">
                 <a href="#home">Главная</a>
                 <a href="#about">О нас</a>
                 <a href="#services">Услуги</a>
                 <a href="#gallery">Работы</a>
-                <a href="#contact">Контакты</a>
-
+                <a href="#contact" class="nav-contact">Связаться</a>
             </nav>
-
-            <a href="#contact" class="header-contact">
-                ОСТАВИТЬ ЗАЯВКУ
-                <span>↗</span>
-            </a>
-
-            <button
-                class="menu-toggle"
-                id="menuToggle"
-                type="button"
-                aria-label="Открыть меню"
-                aria-expanded="false"
-            >
-                <span></span>
-                <span></span>
-            </button>
-
         </header>
 
-
-        <!-- HERO -->
-
         <section class="hero" id="home">
-
-            <div class="hero-image">
-                <img
-                    src="assets/images/03_glossy_car.jpg"
-                    alt="Glossy automobile"
-                >
-            </div>
-
-            <div class="hero-shade"></div>
-
-            <div class="hero-content">
-
-                <span class="eyebrow">
-                    PREMIUM AUTOMOTIVE CARE
-                </span>
-
-                <h2>
-                    PERFECTION<br>
-                    IN EVERY<br>
-                    <span>DETAIL.</span>
-                </h2>
-
-                <p>
-                    Профессиональный уход за автомобилем.
-                    Восстановление внешнего вида, защита
-                    поверхностей и внимание к каждой детали.
+            <div class="hero-overlay"></div>
+            <div class="hero-content reveal">
+                <p class="eyebrow">AUTOMOTIVE DETAILING STUDIO</p>
+                <h1>ТВОЙ АВТОМОБИЛЬ.<br><span>НАШЕ ИСКУССТВО.</span></h1>
+                <p class="hero-description">
+                    Внимание к каждой детали. Уход, который заметен с первого взгляда.
                 </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#services" class="button button-red">
-                        НАШИ УСЛУГИ
-                        <span>↗</span>
-                    </a>
-
-                    <a href="#gallery" class="button button-outline">
-                        СМОТРЕТЬ РАБОТЫ
-                    </a>
-
-                </div>
-
+                <a href="#services" class="primary-button">НАШИ УСЛУГИ <span>↗</span></a>
             </div>
-
-            <div class="hero-bottom">
-                <span>PRECISION / QUALITY / CARE</span>
-                <span>SCROLL TO EXPLORE ↓</span>
-            </div>
-
+            <div class="hero-number">01 / 05</div>
         </section>
-
-
-        <!-- ABOUT -->
 
         <section class="about section" id="about">
-
-            <div class="section-topline">
-                <span>01 — WHO WE ARE</span>
-                <span>THE ZEVRX APPROACH</span>
-            </div>
-
-            <div class="about-layout">
-
-                <div class="about-photo">
-                    <img
-                        src="assets/images/04_exterior_detail.jpg"
-                        alt="Automotive detailing process"
-                        loading="lazy"
-                    >
-
-                    <span class="photo-label">
-                        ATTENTION TO EVERY DETAIL
-                    </span>
+            <div class="section-tag reveal">01 — О НАС</div>
+            <div class="about-grid">
+                <div class="about-heading reveal">
+                    <p class="eyebrow">MORE THAN DETAILING</p>
+                    <h2>ДЕТАЛИ<br>СОЗДАЮТ <span>РАЗНИЦУ.</span></h2>
                 </div>
-
-                <div class="about-content">
-
-                    <span class="eyebrow">
-                        ABOUT ZEVRX
-                    </span>
-
-                    <h2>
-                        NOT JUST<br>
-                        A CLEAN CAR.<br>
-                        <span>A NEW FEELING.</span>
-                    </h2>
-
+                <div class="about-text reveal">
                     <p>
-                        Детейлинг — это больше, чем обычная мойка.
-                        Это комплексный подход к внешнему виду,
-                        чистоте и защите автомобиля.
+                        Детейлинг — это внимание к автомобилю на новом уровне.
+                        Каждая поверхность, каждая линия и каждый элемент
+                        заслуживают аккуратного подхода.
                     </p>
-
                     <p>
-                        ZEVRX — концепция студии, где качество,
-                        аккуратность и внимание к деталям
-                        находятся на первом месте.
+                        ZEVRX — концепция студии, где качество начинается
+                        с внимания к мелочам.
                     </p>
-
-                    <a href="#services" class="text-link">
-                        УЗНАТЬ БОЛЬШЕ
-                        <span>↗</span>
-                    </a>
-
                 </div>
-
             </div>
-
-            <div class="about-stats">
-
-                <div class="stat">
-                    <strong>01</strong>
-                    <span>PRECISION</span>
-                </div>
-
-                <div class="stat">
-                    <strong>02</strong>
-                    <span>QUALITY</span>
-                </div>
-
-                <div class="stat">
-                    <strong>03</strong>
-                    <span>ATTENTION</span>
-                </div>
-
-            </div>
-
         </section>
-
-
-        <!-- SERVICES -->
 
         <section class="services section" id="services">
-
-            <div class="section-topline">
-                <span>02 — WHAT WE DO</span>
-                <span>OUR SERVICES</span>
+            <div class="section-tag reveal">02 — УСЛУГИ</div>
+            <div class="section-heading reveal">
+                <p class="eyebrow">WHAT WE DO</p>
+                <h2>УХОД БЕЗ <span>КОМПРОМИССОВ.</span></h2>
             </div>
 
-            <div class="section-heading">
+            <div class="service-grid">
+                <article class="service-card reveal">
+                    <span class="service-number">01</span>
+                    <div class="service-line"></div>
+                    <h3>Полировка</h3>
+                    <p>Работа с лакокрасочным покрытием и восстановление блеска.</p>
+                    <span class="service-arrow">↗</span>
+                </article>
 
-                <div>
-                    <span class="eyebrow">OUR EXPERTISE</span>
+                <article class="service-card reveal">
+                    <span class="service-number">02</span>
+                    <div class="service-line"></div>
+                    <h3>Керамика</h3>
+                    <p>Защитное покрытие для ухода за внешним видом автомобиля.</p>
+                    <span class="service-arrow">↗</span>
+                </article>
 
-                    <h2>
-                        CARE THAT<br>
-                        <span>GOES FURTHER.</span>
-                    </h2>
-                </div>
+                <article class="service-card reveal">
+                    <span class="service-number">03</span>
+                    <div class="service-line"></div>
+                    <h3>Детейлинг кузова</h3>
+                    <p>Тщательная очистка и уход за внешними поверхностями.</p>
+                    <span class="service-arrow">↗</span>
+                </article>
 
-                <p>
-                    Комплексный уход за автомобилем —
-                    от внешнего вида до чистоты салона.
-                </p>
-
+                <article class="service-card reveal">
+                    <span class="service-number">04</span>
+                    <div class="service-line"></div>
+                    <h3>Детейлинг салона</h3>
+                    <p>Комплексный уход за интерьером и его элементами.</p>
+                    <span class="service-arrow">↗</span>
+                </article>
             </div>
-
-
-            <div class="services-grid">
-
-                <article class="service-card">
-
-                    <div class="service-image">
-                        <img
-                            src="assets/images/01_polishing.jpg"
-                            alt="Car polishing"
-                            loading="lazy"
-                        >
-
-                        <span class="service-number">01</span>
-                    </div>
-
-                    <div class="service-details">
-                        <span>PAINTWORK</span>
-                        <h3>Полировка кузова</h3>
-                        <p>
-                            Работа с лакокрасочным покрытием
-                            для улучшения внешнего вида автомобиля.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <div class="service-image">
-                        <img
-                            src="assets/images/02_ceramic_coating.jpg"
-                            alt="Ceramic coating"
-                            loading="lazy"
-                        >
-
-                        <span class="service-number">02</span>
-                    </div>
-
-                    <div class="service-details">
-                        <span>PROTECTION</span>
-                        <h3>Керамическое покрытие</h3>
-                        <p>
-                            Дополнительная защита поверхности
-                            и выразительный внешний вид.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <div class="service-image">
-                        <img
-                            src="assets/images/04_exterior_detail.jpg"
-                            alt="Exterior detailing"
-                            loading="lazy"
-                        >
-
-                        <span class="service-number">03</span>
-                    </div>
-
-                    <div class="service-details">
-                        <span>EXTERIOR</span>
-                        <h3>Внешний детейлинг</h3>
-                        <p>
-                            Детальная очистка и уход
-                            за внешними элементами автомобиля.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <div class="service-image">
-                        <img
-                            src="assets/images/05_interior_cleaning.jpg"
-                            alt="Interior detailing"
-                            loading="lazy"
-                        >
-
-                        <span class="service-number">04</span>
-                    </div>
-
-                    <div class="service-details">
-                        <span>INTERIOR</span>
-                        <h3>Детейлинг салона</h3>
-                        <p>
-                            Тщательная очистка и уход
-                            за интерьером автомобиля.
-                        </p>
-                    </div>
-
-                </article>
-
-            </div>
-
         </section>
-
-
-        <!-- FEATURE -->
 
         <section class="feature">
-
-            <div class="feature-image">
-                <img
-                    src="assets/images/03_glossy_car.jpg"
-                    alt="Car with glossy finish"
-                    loading="lazy"
-                >
+            <div class="feature-image"></div>
+            <div class="feature-content reveal">
+                <p class="eyebrow">THE ZEVRX APPROACH</p>
+                <h2>НЕ ПРОСТО<br><span>ЧИСТОТА.</span><br>СОСТОЯНИЕ.</h2>
+                <p>Важен не только результат. Важен каждый этап работы.</p>
             </div>
-
-            <div class="feature-overlay"></div>
-
-            <div class="feature-content">
-
-                <span class="eyebrow">
-                    THE DIFFERENCE IS IN DETAILS
-                </span>
-
-                <h2>
-                    MAKE EVERY<br>
-                    <span>DETAIL COUNT.</span>
-                </h2>
-
-                <p>
-                    Внешний вид автомобиля складывается
-                    из мелочей. Именно поэтому важна
-                    каждая поверхность, каждый элемент
-                    и каждый этап ухода.
-                </p>
-
-                <a href="#contact" class="button button-red">
-                    ОБСУДИТЬ ПРОЕКТ
-                    <span>↗</span>
-                </a>
-
-            </div>
-
         </section>
 
-
-        <!-- GALLERY -->
-
         <section class="gallery section" id="gallery">
-
-            <div class="section-topline">
-                <span>03 — VISUAL EXPERIENCE</span>
-                <span>GALLERY</span>
+            <div class="section-tag reveal">03 — ГАЛЕРЕЯ</div>
+            <div class="section-heading reveal">
+                <p class="eyebrow">SELECTED VISUALS</p>
+                <h2>ВНИМАНИЕ <span>К ДЕТАЛЯМ.</span></h2>
             </div>
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">SELECTED VISUALS</span>
-
-                    <h2>
-                        DETAILS<br>
-                        <span>MATTER.</span>
-                    </h2>
-                </div>
-
-                <p>
-                    Визуальная подборка работ
-                    и процессов автомобильного ухода.
-                </p>
-
-            </div>
-
 
             <div class="gallery-grid">
-
-                <div class="gallery-item gallery-large">
-                    <img
-                        src="assets/images/03_glossy_car.jpg"
-                        alt="Glossy car"
-                        loading="lazy"
-                    >
-                    <span>01 / FINISH</span>
+                <div class="gallery-item gallery-large reveal">
+                    <img src="assets/images/01_polishing.jpg" alt="Полировка автомобиля">
+                    <span>PAINT CORRECTION</span>
                 </div>
-
-                <div class="gallery-item">
-                    <img
-                        src="assets/images/01_polishing.jpg"
-                        alt="Polishing process"
-                        loading="lazy"
-                    >
-                    <span>02 / POLISHING</span>
+                <div class="gallery-item reveal">
+                    <img src="assets/images/02_ceramic_coating.jpg" alt="Керамическое покрытие">
+                    <span>CERAMIC COATING</span>
                 </div>
-
-                <div class="gallery-item">
-                    <img
-                        src="assets/images/02_ceramic_coating.jpg"
-                        alt="Ceramic protection"
-                        loading="lazy"
-                    >
-                    <span>03 / PROTECTION</span>
+                <div class="gallery-item reveal">
+                    <img src="assets/images/03_glossy_car.jpg" alt="Блеск автомобиля">
+                    <span>PERFECT GLOSS</span>
                 </div>
-
-                <div class="gallery-item">
-                    <img
-                        src="assets/images/04_exterior_detail.jpg"
-                        alt="Exterior care"
-                        loading="lazy"
-                    >
-                    <span>04 / EXTERIOR</span>
+                <div class="gallery-item reveal">
+                    <img src="assets/images/04_exterior_detail.jpg" alt="Детейлинг кузова">
+                    <span>EXTERIOR CARE</span>
                 </div>
-
-                <div class="gallery-item">
-                    <img
-                        src="assets/images/05_interior_cleaning.jpg"
-                        alt="Interior cleaning"
-                        loading="lazy"
-                    >
-                    <span>05 / INTERIOR</span>
+                <div class="gallery-item reveal">
+                    <img src="assets/images/05_interior_cleaning.jpg" alt="Детейлинг салона">
+                    <span>INTERIOR CARE</span>
                 </div>
-
             </div>
 
             <p class="gallery-note">
-                Демонстрационный проект. Фотографии используются
-                как визуальные примеры и могут быть заменены
-                собственными работами студии.
+                Демонстрационные изображения. В готовом проекте будут размещены
+                реальные фотографии работ студии.
             </p>
-
         </section>
-
-
-        <!-- CONTACT -->
 
         <section class="contact section" id="contact">
-
-            <div class="section-topline">
-                <span>04 — GET IN TOUCH</span>
-                <span>CONTACT</span>
-            </div>
-
-            <div class="contact-layout">
-
-                <div class="contact-heading">
-
-                    <span class="eyebrow">
-                        LET'S TALK
-                    </span>
-
-                    <h2>
-                        YOUR CAR<br>
-                        DESERVES<br>
-                        <span>MORE.</span>
-                    </h2>
-
-                    <p>
-                        Расскажите, какая услуга вас интересует.
-                        Мы подготовим следующий шаг после
-                        подключения реальных контактов студии.
-                    </p>
-
+            <div class="section-tag reveal">04 — КОНТАКТЫ</div>
+            <div class="contact-grid">
+                <div class="contact-heading reveal">
+                    <p class="eyebrow">LET'S TALK</p>
+                    <h2>ГОТОВЫ<br>К <span>ПЕРЕМЕНАМ?</span></h2>
+                    <p>Свяжитесь с нами, чтобы обсудить уход за вашим автомобилем.</p>
                 </div>
 
+                <form class="contact-form reveal" id="contactForm">
+                    <label for="clientName">Ваше имя</label>
+                    <input id="clientName" type="text" placeholder="Как к вам обращаться?" required>
 
-                <form class="contact-form" id="contact-form">
+                    <label for="clientPhone">Телефон</label>
+                    <input id="clientPhone" type="tel" placeholder="+7 ..." required>
 
-                    <label for="name">ВАШЕ ИМЯ</label>
+                    <label for="clientMessage">Что вас интересует?</label>
+                    <textarea id="clientMessage" rows="4" placeholder="Например, полировка автомобиля"></textarea>
 
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Введите имя"
-                        required
-                        minlength="2"
-                    >
-
-
-                    <label for="phone">НОМЕР ТЕЛЕФОНА</label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="+7 (___) ___-__-__"
-                        required
-                    >
-
-
-                    <label for="service">ИНТЕРЕСУЮЩАЯ УСЛУГА</label>
-
-                    <select id="service" name="service" required>
-
-                        <option value="" selected disabled>
-                            Выберите услугу
-                        </option>
-
-                        <option value="Полировка кузова">
-                            Полировка кузова
-                        </option>
-
-                        <option value="Керамическое покрытие">
-                            Керамическое покрытие
-                        </option>
-
-                        <option value="Внешний детейлинг">
-                            Внешний детейлинг
-                        </option>
-
-                        <option value="Детейлинг салона">
-                            Детейлинг салона
-                        </option>
-
-                        <option value="Другое">
-                            Другое
-                        </option>
-
-                    </select>
-
-
-                    <label for="message">КОММЕНТАРИЙ</label>
-
-                    <textarea
-                        id="message"
-                        name="message"
-                        placeholder="Расскажите подробнее..."
-                        rows="3"
-                    ></textarea>
-
-
-                    <button
-                        class="button button-red form-button"
-                        type="submit"
-                    >
-                        ОТПРАВИТЬ ЗАЯВКУ
-                        <span>↗</span>
+                    <button type="submit" class="primary-button">
+                        ОТПРАВИТЬ ЗАЯВКУ <span>↗</span>
                     </button>
-
-                    <p class="form-note">
-                        Демонстрационная форма. Отправка заявок
-                        будет подключена после согласования контактов.
-                    </p>
-
+                    <p class="form-note">Демонстрационная форма — подключение отправки настраивается отдельно.</p>
                 </form>
-
             </div>
-
         </section>
 
-
-        <!-- FOOTER -->
-
         <footer class="footer">
-
-            <div class="footer-main">
-
-                <a href="#home" class="logo footer-logo">
-                    ZEV<span>R</span>X
-                </a>
-
-                <p>
-                    THE ART OF AUTOMOTIVE CARE.
-                </p>
-
-                <a href="#home" class="back-top">
-                    BACK TO TOP ↑
-                </a>
-
-            </div>
-
-            <div class="footer-bottom">
-
-                <span>© 2026 ZEVRX. DEMO PROJECT.</span>
-
-                <span>DESIGNED WITH ATTENTION TO DETAIL.</span>
-
-            </div>
-
+            <a href="#" class="logo">ZEVRX<span>.</span></a>
+            <p>CONCEPT WEBSITE · AUTOMOTIVE DETAILING</p>
+            <span>© 2026 ZEVRX</span>
         </footer>
 
     </main>
 
+    <script src="script.js"></script>
 </body>
 </html>
