@@ -1,11 +1,10 @@
 
 /* =========================================
-   ZEVRX — MAIN JAVASCRIPT
+   ZEVRX — COMPLETE JAVASCRIPT
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ELEMENTS
     const intro = document.getElementById("intro");
     const site = document.getElementById("site");
     const enterButton = document.getElementById("enterSite");
@@ -15,49 +14,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const navigation = document.getElementById("navigation");
 
     const contactForm = document.getElementById("contact-form");
+    const header = document.getElementById("header");
 
 
     // =====================================
-    // INTRO EXPERIENCE
+    // INTRO — CAR DEPARTURE
     // =====================================
 
     document.body.classList.add("loading");
 
-    let introFinished = false;
+    let introStarted = false;
 
-    function enterWebsite() {
+    function finishIntro() {
 
-        if (introFinished) return;
+        if (!intro || !site) return;
 
-        introFinished = true;
-
-        // Stop engine sound
-        if (engineSound) {
-            engineSound.pause();
-            engineSound.currentTime = 0;
-        }
-
-        // Hide intro
         intro.classList.add("hidden");
-
-        // Show website
         site.classList.add("visible");
 
         document.body.classList.remove("loading");
 
-        // Remove intro from page after animation
         setTimeout(() => {
             intro.style.display = "none";
-        }, 1100);
+        }, 1000);
     }
 
 
-    // Start sound only after a real user interaction
-    if (enterButton && engineSound) {
+    async function startIntro() {
 
-        enterButton.addEventListener("click", async () => {
+        if (introStarted) return;
 
-            if (introFinished) return;
+        introStarted = true;
+
+        if (enterButton) {
+            enterButton.disabled = true;
+            enterButton.setAttribute("aria-label", "Машина отправляется");
+        }
+
+        // Start engine audio after the user's click.
+        if (engineSound) {
 
             try {
                 engineSound.volume = 0.65;
@@ -65,23 +60,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 await engineSound.play();
 
-                // Let the engine sound play while the intro is visible.
-                // The visitor can enter the website with the button again.
             } catch (error) {
-                console.warn("Engine audio could not be played:", error);
+                // The website will still open if audio is unavailable.
+                console.warn("Engine audio unavailable:", error);
             }
 
-            // Enter after a short cinematic pause
-            setTimeout(() => {
-                enterWebsite();
-            }, 4200);
+        }
 
-        });
+        // Start the car animation.
+        if (intro) {
+            intro.classList.add("is-running");
+        }
 
-    } else if (enterButton) {
+        // Match the CSS car animation duration.
+        setTimeout(() => {
+            finishIntro();
+        }, 2900);
 
-        enterButton.addEventListener("click", enterWebsite);
+    }
 
+
+    if (enterButton) {
+        enterButton.addEventListener("click", startIntro);
+    } else {
+        finishIntro();
     }
 
 
@@ -97,12 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             menuToggle.classList.toggle("active", isOpen);
 
-            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
 
         });
 
 
-        // Close menu after clicking a link
         navigation.querySelectorAll("a").forEach(link => {
 
             link.addEventListener("click", () => {
@@ -117,14 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
-        // Close menu when clicking outside
         document.addEventListener("click", event => {
 
-            const clickedInsideMenu =
+            const clickedInside =
                 navigation.contains(event.target) ||
                 menuToggle.contains(event.target);
 
-            if (!clickedInsideMenu) {
+            if (!clickedInside) {
 
                 navigation.classList.remove("open");
                 menuToggle.classList.remove("active");
@@ -142,21 +145,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // HEADER SCROLL EFFECT
     // =====================================
 
-    const header = document.getElementById("header");
-
     function updateHeader() {
 
         if (!header) return;
 
-        if (window.scrollY > 40) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
+        header.classList.toggle("scrolled", window.scrollY > 40);
 
     }
 
-    window.addEventListener("scroll", updateHeader, { passive: true });
+    window.addEventListener("scroll", updateHeader, {
+        passive: true
+    });
 
     updateHeader();
 
@@ -171,27 +170,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if ("IntersectionObserver" in window) {
 
-        const observer = new IntersectionObserver((entries, currentObserver) => {
+        const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
 
-            entries.forEach(entry => {
+                entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                    if (entry.isIntersecting) {
 
-                    entry.target.classList.add("revealed");
+                        entry.target.classList.add("revealed");
 
-                    currentObserver.unobserve(entry.target);
+                        observer.unobserve(entry.target);
 
-                }
+                    }
 
-            });
+                });
 
-        }, {
-            threshold: 0.12
-        });
+            },
+            {
+                threshold: 0.12
+            }
+        );
 
         revealElements.forEach(element => {
+
             element.classList.add("reveal");
-            observer.observe(element);
+
+            revealObserver.observe(element);
+
         });
 
     } else {
@@ -204,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =====================================
-    // CONTACT FORM — DEMO MODE
+    // DEMO CONTACT FORM
     // =====================================
 
     if (contactForm) {
@@ -215,15 +220,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!contactForm.reportValidity()) return;
 
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const service = document.getElementById("service").value;
+            const name = document.getElementById("name");
+            const phone = document.getElementById("phone");
+            const service = document.getElementById("service");
 
-            if (!name || !phone || !service) return;
+            if (
+                !name ||
+                !phone ||
+                !service ||
+                !name.value.trim() ||
+                !phone.value.trim() ||
+                !service.value
+            ) {
+                return;
+            }
 
             alert(
-                "Спасибо, " + name + "!\n\n" +
-                "Ваша демонстрационная заявка заполнена.\n" +
+                "Спасибо, " + name.value.trim() + "!\n\n" +
+                "Демонстрационная заявка заполнена.\n" +
                 "Для реальной отправки необходимо подключить контакты студии."
             );
 
@@ -235,14 +249,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =====================================
-    // IMAGE FALLBACK
+    // IMAGE ERROR CHECK
     // =====================================
 
     document.querySelectorAll("img").forEach(image => {
 
         image.addEventListener("error", () => {
 
-            console.warn("Image not found:", image.getAttribute("src"));
+            console.warn(
+                "Image not found: " + image.getAttribute("src")
+            );
 
         });
 
@@ -277,6 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    console.log("ZEVRX website initialized.");
+    console.log("ZEVRX — website successfully initialized.");
 
 });
