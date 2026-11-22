@@ -1,9 +1,14 @@
 
-/* =========================================
-   ZEVRX — COMPLETE JAVASCRIPT
-========================================= */
+/* =====================================================
+   ZEVRX — PREMIUM DETAILING
+   COMPLETE NEW JAVASCRIPT
+===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // ================================================
+    // ELEMENTS
+    // ================================================
 
     const intro = document.getElementById("intro");
     const site = document.getElementById("site");
@@ -13,19 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menuToggle");
     const navigation = document.getElementById("navigation");
 
-    const contactForm = document.getElementById("contact-form");
     const header = document.getElementById("header");
+    const contactForm = document.getElementById("contact-form");
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
 
 
-    // =====================================
-    // INTRO — CAR DEPARTURE
-    // =====================================
-
-    document.body.classList.add("loading");
+    // ================================================
+    // INTRO — CINEMATIC CAR EXPERIENCE
+    // ================================================
 
     let introStarted = false;
 
-    function finishIntro() {
+    function openWebsite() {
 
         if (!intro || !site) return;
 
@@ -36,11 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             intro.style.display = "none";
-        }, 1000);
+        }, 1100);
+
     }
 
 
-    async function startIntro() {
+    function startExperience() {
 
         if (introStarted) return;
 
@@ -48,52 +56,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (enterButton) {
             enterButton.disabled = true;
-            enterButton.setAttribute("aria-label", "Машина отправляется");
+            enterButton.innerHTML = `
+                <span>STARTING EXPERIENCE</span>
+                <span class="intro-button-arrow">↗</span>
+            `;
         }
 
-        // Start engine audio after the user's click.
+        // Start engine sound after the user's click.
         if (engineSound) {
 
-            try {
-                engineSound.volume = 0.65;
-                engineSound.currentTime = 0;
+            engineSound.volume = 0.7;
+            engineSound.currentTime = 0;
 
-                await engineSound.play();
+            const soundPromise = engineSound.play();
 
-            } catch (error) {
-                // The website will still open if audio is unavailable.
-                console.warn("Engine audio unavailable:", error);
+            if (soundPromise && typeof soundPromise.catch === "function") {
+                soundPromise.catch(() => {
+                    // Website still opens if audio is unavailable.
+                });
             }
 
         }
 
-        // Start the car animation.
+        // Trigger the car departure animation.
         if (intro) {
             intro.classList.add("is-running");
         }
 
-        // Match the CSS car animation duration.
+        // Give the car time to leave the screen.
+        const animationDuration = reducedMotion ? 500 : 2800;
+
         setTimeout(() => {
-            finishIntro();
-        }, 2900);
+            openWebsite();
+        }, animationDuration);
 
     }
 
 
     if (enterButton) {
-        enterButton.addEventListener("click", startIntro);
+        enterButton.addEventListener("click", startExperience);
     } else {
-        finishIntro();
+        openWebsite();
     }
 
 
-    // =====================================
+    // ================================================
     // MOBILE NAVIGATION
-    // =====================================
+    // ================================================
+
+    function closeMenu() {
+
+        if (!menuToggle || !navigation) return;
+
+        navigation.classList.remove("open");
+        menuToggle.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+
+    }
+
 
     if (menuToggle && navigation) {
 
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener("click", (event) => {
+
+            event.stopPropagation();
 
             const isOpen = navigation.classList.toggle("open");
 
@@ -109,31 +136,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         navigation.querySelectorAll("a").forEach(link => {
 
-            link.addEventListener("click", () => {
-
-                navigation.classList.remove("open");
-                menuToggle.classList.remove("active");
-
-                menuToggle.setAttribute("aria-expanded", "false");
-
-            });
+            link.addEventListener("click", closeMenu);
 
         });
 
 
-        document.addEventListener("click", event => {
+        document.addEventListener("click", (event) => {
 
-            const clickedInside =
+            const clickedInsideMenu =
                 navigation.contains(event.target) ||
                 menuToggle.contains(event.target);
 
-            if (!clickedInside) {
-
-                navigation.classList.remove("open");
-                menuToggle.classList.remove("active");
-
-                menuToggle.setAttribute("aria-expanded", "false");
-
+            if (!clickedInsideMenu) {
+                closeMenu();
             }
 
         });
@@ -141,17 +156,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // =====================================
+    // ================================================
     // HEADER SCROLL EFFECT
-    // =====================================
+    // ================================================
 
     function updateHeader() {
 
         if (!header) return;
 
-        header.classList.toggle("scrolled", window.scrollY > 40);
+        header.classList.toggle(
+            "scrolled",
+            window.scrollY > 40
+        );
 
     }
+
 
     window.addEventListener("scroll", updateHeader, {
         passive: true
@@ -160,18 +179,30 @@ document.addEventListener("DOMContentLoaded", () => {
     updateHeader();
 
 
-    // =====================================
-    // SCROLL REVEAL
-    // =====================================
+    // ================================================
+    // SCROLL REVEAL ANIMATIONS
+    // ================================================
+
+    const revealSelectors = [
+        ".section-heading",
+        ".about-layout",
+        ".about-stats",
+        ".service-card",
+        ".feature-content",
+        ".gallery-item",
+        ".contact-heading",
+        ".contact-form"
+    ];
 
     const revealElements = document.querySelectorAll(
-        ".section-heading, .about-grid, .about-bottom, .service-card, .feature-content, .feature-image, .gallery-item, .contact-grid"
+        revealSelectors.join(",")
     );
 
-    if ("IntersectionObserver" in window) {
 
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
+    if ("IntersectionObserver" in window && !reducedMotion) {
+
+        const observer = new IntersectionObserver(
+            (entries, currentObserver) => {
 
                 entries.forEach(entry => {
 
@@ -179,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         entry.target.classList.add("revealed");
 
-                        observer.unobserve(entry.target);
+                        currentObserver.unobserve(entry.target);
 
                     }
 
@@ -187,15 +218,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             },
             {
-                threshold: 0.12
+                threshold: 0.12,
+                rootMargin: "0px 0px -35px 0px"
             }
         );
+
 
         revealElements.forEach(element => {
 
             element.classList.add("reveal");
 
-            revealObserver.observe(element);
+            observer.observe(element);
 
         });
 
@@ -208,13 +241,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // =====================================
-    // DEMO CONTACT FORM
-    // =====================================
+    // ================================================
+    // CONTACT FORM — DEMO MODE
+    // ================================================
 
     if (contactForm) {
 
-        contactForm.addEventListener("submit", event => {
+        contactForm.addEventListener("submit", (event) => {
 
             event.preventDefault();
 
@@ -224,21 +257,25 @@ document.addEventListener("DOMContentLoaded", () => {
             const phone = document.getElementById("phone");
             const service = document.getElementById("service");
 
+            if (!name || !phone || !service) return;
+
+            const customerName = name.value.trim();
+            const customerPhone = phone.value.trim();
+            const selectedService = service.value;
+
             if (
-                !name ||
-                !phone ||
-                !service ||
-                !name.value.trim() ||
-                !phone.value.trim() ||
-                !service.value
+                customerName.length < 2 ||
+                customerPhone.length < 5 ||
+                !selectedService
             ) {
                 return;
             }
 
             alert(
-                "Спасибо, " + name.value.trim() + "!\n\n" +
-                "Демонстрационная заявка заполнена.\n" +
-                "Для реальной отправки необходимо подключить контакты студии."
+                "Спасибо, " + customerName + "!\n\n" +
+                "Ваша демонстрационная заявка заполнена.\n\n" +
+                "Услуга: " + selectedService + "\n\n" +
+                "Реальная отправка заявок пока не подключена."
             );
 
             contactForm.reset();
@@ -248,16 +285,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // =====================================
-    // IMAGE ERROR CHECK
-    // =====================================
+    // ================================================
+    // IMAGE FALLBACK
+    // ================================================
 
     document.querySelectorAll("img").forEach(image => {
 
         image.addEventListener("error", () => {
 
+            image.classList.add("image-error");
+
             console.warn(
-                "Image not found: " + image.getAttribute("src")
+                "ZEVRX image not found:",
+                image.getAttribute("src")
             );
 
         });
@@ -265,34 +305,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // =====================================
-    // SMOOTH ANCHOR NAVIGATION
-    // =====================================
+    // ================================================
+    // ESCAPE KEY — CLOSE MOBILE MENU
+    // ================================================
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.addEventListener("keydown", (event) => {
 
-        anchor.addEventListener("click", event => {
-
-            const targetId = anchor.getAttribute("href");
-
-            if (!targetId || targetId === "#") return;
-
-            const target = document.querySelector(targetId);
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        });
+        if (event.key === "Escape") {
+            closeMenu();
+        }
 
     });
 
 
-    console.log("ZEVRX — website successfully initialized.");
+    // ================================================
+    // INITIALIZATION
+    // ================================================
+
+    console.log("ZEVRX website initialized successfully.");
 
 });
